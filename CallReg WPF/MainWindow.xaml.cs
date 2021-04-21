@@ -46,9 +46,9 @@ namespace CallReg_WPF
 
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            var currentData = new List<Data>
+            var currentData = new List<DataClass>
             {
-                new Data(){
+                new DataClass(){
                     id=int.Parse(idTextbox.Text),
                     callId=int.Parse(nrTextbox.Text),
                     name=nameTextbox.Text,
@@ -63,7 +63,7 @@ namespace CallReg_WPF
                 }
             };
             List<string> textToWrite = new List<string>();
-            foreach(Data a in currentData)
+            foreach(DataClass a in currentData)
             {
                 textToWrite.Add("ID: " + a.id.ToString());
                 textToWrite.Add("Nº de od liga: " + a.callId.ToString());
@@ -78,8 +78,14 @@ namespace CallReg_WPF
             }
             File.WriteAllLines(@"C:\Users\Iuri Dias\Desktop\test.txt", textToWrite);
         }
+
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            directoryDialog directoryWindow = new directoryDialog();
+            directoryWindow.Show();
+        }
     }
-    public class Data
+    public class DataClass
     {
         public int id { get; set; }
         public int callId { get; set; }
@@ -92,5 +98,11 @@ namespace CallReg_WPF
         public bool appSmartrouter { get; set; }
         public bool icr { get; set; }
 
+    }
+
+    public class Data
+    {
+        public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
+       // public string saveDir = File.ReadAllText(mainDir);
     }
 }

@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CallReg_WPF"
         mc:Ignorable="d"
-        Title="directoryDialog" Height="450" Width="800">
+        Title="Diretório" Height="119.437" Width="660.054" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="244*"/>
+            <ColumnDefinition Width="83*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF171717" Offset="0"/>
+                <GradientStop Color="#FF8D0000" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBox x:Name="dirTextbox" Height="26" Margin="10,10,130,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="idTextbox" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+        <Button x:Name="bOpen" Content="Abrir" Margin="0,41,130,10" AutomationProperties.Name="bCommit" Click="bOpen_Click" Background="#FF555555" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="120" Padding="1,7" Grid.ColumnSpan="2"/>
+        <Button x:Name="bCommit" Content="Confirmar" Margin="0,10,5,10" AutomationProperties.Name="bCommit" Click="bCommit_Click" Background="#FF555555" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="120" Padding="1,7" Grid.Column="1"/>
+
     </Grid>
 </Window>

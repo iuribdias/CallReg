@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
+
 
 namespace CallReg_WPF
 {
@@ -22,6 +24,22 @@ namespace CallReg_WPF
         public directoryDialog()
         {
             InitializeComponent();
+        }
+
+        private void bOpen_Click(object sender, RoutedEventArgs e)
+        {
+            string resultDir;
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                resultDir = dialog.SelectedPath;
+            }
+            dirTextbox.Text = resultDir;
+        }
+
+        private void bCommit_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
