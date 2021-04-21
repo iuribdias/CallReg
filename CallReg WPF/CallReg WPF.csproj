@@ -97,5 +97,14 @@
   <ItemGroup>
     <Resource Include="abstract_lines_triangle-512.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vodafone-Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="vodafone-png-logo-8417.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="settingsa.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

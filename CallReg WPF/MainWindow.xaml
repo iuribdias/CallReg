@@ -5,15 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CallReg_WPF"
         mc:Ignorable="d"
-        Title="CallReg" Height="450" Width="800" Background="Black" FontFamily="Source Sans Pro Light" FontSize="18" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="CallReg" Height="450" Width="800" Background="Black" FontFamily="Source Sans Pro Light" FontSize="18" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="16*"/>
-            <RowDefinition Height="205*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="330*"/>
+            <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="98*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="419*"/>
+            <ColumnDefinition Width="365*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -21,14 +23,41 @@
                 <GradientStop Color="#FF492626" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Content="" Margin="724,0,0,0" VerticalAlignment="Top" Width="60" Height="30" Click="Button_Click" Grid.Column="1" HorizontalAlignment="Right">
+        <Label x:Name="idLabel" Content="AID/CONTA/NIF: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,43,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="idLabel"/>
+        <TextBox x:Name="idTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="137,47,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="268" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="idTextbox"/>
+        <Label x:Name="nrLabel" Content="Nº de onde liga: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,71,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="nrLabel"/>
+        <TextBox x:Name="nrTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="137,75,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="268" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="nrTextbox"/>
+        <Label x:Name="nameLabel" Content="Nome: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,99,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="nameLabel"/>
+        <TextBox x:Name="nameTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="137,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="268" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="nameTextbox"/>
+        <Label x:Name="oltLabel" Content="Central/OLT: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,127,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="oltLabel"/>
+        <TextBox x:Name="oltTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="137,131,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="268" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="oltTextbox"/>
+        <Label x:Name="cellLabel" Content="Celula: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,155,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="cellLabel"/>
+        <TextBox x:Name="cellTextbox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="137,159,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="268" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="cellTextbox"/>
+        <Label x:Name="addressLabel" Content="Validação morada: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,192,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="145" AutomationProperties.Name="addressLabel"/>
+        <Label x:Name="techseeLabel" Content="TechSee: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,224,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="techseeLabel"/>
+        <Label x:Name="smartrouterLabel" Content="App SmartRouter: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,256,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="145" AutomationProperties.Name="smartrouterLabel"/>
+        <Label x:Name="icrLabel" Content="ICR: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,288,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="icrLabel"/>
+        <CheckBox x:Name="addressCheckbox" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="158,202,0,0" Grid.Row="1" VerticalAlignment="Top" AutomationProperties.Name="addressCheckbox" Height="22" Width="20"/>
+        <CheckBox x:Name="techseeCheckbox" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="158,234,0,0" Grid.Row="1" VerticalAlignment="Top" AutomationProperties.Name="techseeCheckbox" Width="55" Height="22"/>
+        <CheckBox x:Name="smartrouterCheckbox" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="158,266,0,0" Grid.Row="1" VerticalAlignment="Top" AutomationProperties.Name="smartrouterCheckbox" Height="22" Width="20"/>
+        <CheckBox x:Name="icrCheckbox" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="158,298,0,0" Grid.Row="1" VerticalAlignment="Top" AutomationProperties.Name="icrCheckbox" Height="22" Width="20"/>
+        <RichTextBox x:Name="situationTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="273" Margin="90,25,0,0" Grid.Row="1" VerticalAlignment="Top" Width="250" Background="#FF555555" AutomationProperties.Name="situationTextBox" AutomationProperties.HelpText="Situação" ClipToBounds="True">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label x:Name="situationLabel" Content="Situação: " Grid.Column="2" HorizontalAlignment="Left" Margin="4,25,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="81" AutomationProperties.Name="situationLabel"/>
+        <Image x:Name="vdfLogo" HorizontalAlignment="Left" Height="143" Margin="-21,-14,0,0" VerticalAlignment="Top" Width="143" Grid.RowSpan="2" Source="vodafone-png-logo-8417.png" Grid.ColumnSpan="2" RenderOptions.BitmapScalingMode="HighQuality"/>
+        <Button x:Name="bCommit" Content="Confirmar" Grid.Column="2" HorizontalAlignment="Left" Margin="193,1,0,0" Grid.Row="2" VerticalAlignment="Top" Width="147" Height="53" AutomationProperties.Name="bCommit" Click="bCommit_Click">
             <Button.Background>
-                <ImageBrush ImageSource="abstract_lines_triangle-512.png"/>
+                <SolidColorBrush Color="#FF555555"/>
             </Button.Background>
         </Button>
-        <Button Content="" HorizontalAlignment="Right" Margin="0,2,65,0" VerticalAlignment="Top" Width="30" Height="30" Click="Maximize_Click" Grid.Column="1" AutomationProperties.Name="ss">
+        <Button Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="305,5,0,0" VerticalAlignment="Top" Width="50" Height="50" Grid.RowSpan="2">
             <Button.Background>
-                <ImageBrush ImageSource="abstract_lines_triangle-512.png"/>
+                <ImageBrush ImageSource="settingsa.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
 

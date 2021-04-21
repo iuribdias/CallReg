@@ -42,6 +42,10 @@ namespace CallReg_WPF
             }
 
         }
-        
+
+        private void bCommit_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
