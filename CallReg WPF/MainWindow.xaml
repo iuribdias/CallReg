@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CallReg_WPF"
         mc:Ignorable="d"
-        Title="CallReg" Height="478.955" Width="854.289" Background="Black" FontFamily="Source Sans Pro Light" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="CallReg" Height="542.895" Width="825.335" Background="Black" FontFamily="Source Sans Pro Light" FontSize="18" WindowStartupLocation="CenterScreen" Icon="vdf logo.png" RenderOptions.BitmapScalingMode="HighQuality">
     <Grid Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
