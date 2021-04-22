@@ -50,38 +50,53 @@ namespace CallReg_WPF
         //b_Commit is where most action goes on. Its the function that checks what has been done and saves the info to the files.
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            
-            var currentData = new List<DataCollection>
+            DateTime currentDate = DateTime.Now;
+            Data d = new Data();
+            try
             {
-                new DataCollection(){
-                    id=int.Parse(idTextbox.Text),
-                    callId=int.Parse(nrTextbox.Text),
-                    name=nameTextbox.Text,
-                    addressVer=(bool)addressCheckbox.IsChecked,
-                    situation=new TextRange(situationTextBox.Document.ContentStart,
-                    situationTextBox.Document.ContentEnd).Text,
-                    olt=oltTextbox.Text,
-                    cell=cellTextbox.Text,
-                    techSee=(bool)techseeCheckbox.IsChecked,
-                    appSmartrouter=(bool)smartrouterCheckbox.IsChecked,
-                    icr=(bool)icrCheckbox.IsChecked
+                //This gets the user inputed data and makes it into a List.
+                var currentData = new List<DataCollection>
+                {
+                    new DataCollection()
+                    {
+                        id=int.Parse(idTextbox.Text),
+                        callId=int.Parse(nrTextbox.Text),
+                        name=nameTextbox.Text,
+                        addressVer=(bool)addressCheckbox.IsChecked,
+                        situation=new TextRange(situationTextBox.Document.ContentStart,
+                        situationTextBox.Document.ContentEnd).Text,
+                        olt=oltTextbox.Text,
+                        cell=cellTextbox.Text,
+                        techSee=(bool)techseeCheckbox.IsChecked,
+                        appSmartrouter=(bool)smartrouterCheckbox.IsChecked,
+                        icr=(bool)icrCheckbox.IsChecked
+                    }
+                };
+
+                //This takes the data and formats it to go into de file.
+                List<string> textToWrite = new List<string>();
+                foreach (DataCollection a in currentData)
+                {
+                    textToWrite.Add("ID: " + a.id.ToString());
+                    textToWrite.Add("Nº de od liga: " + a.callId.ToString());
+                    textToWrite.Add("Nome: " + a.name);
+                    textToWrite.Add("Validação morada: " + a.addressVer.ToString());
+                    textToWrite.Add("Situação: " + a.situation);
+                    textToWrite.Add("Central/Olt: " + a.olt);
+                    textToWrite.Add("Célula: " + a.cell);
+                    textToWrite.Add("TechSee: " + a.techSee.ToString());
+                    textToWrite.Add("App SmartRouter: " + a.appSmartrouter.ToString());
+                    textToWrite.Add("Inquerito ICR: " + a.icr.ToString());
                 }
-            };
-            List<string> textToWrite = new List<string>();
-            foreach(DataCollection a in currentData)
-            {
-                textToWrite.Add("ID: " + a.id.ToString());
-                textToWrite.Add("Nº de od liga: " + a.callId.ToString());
-                textToWrite.Add("Nome: " + a.name);
-                textToWrite.Add("Validação morada: " + a.addressVer.ToString());
-                textToWrite.Add("Situação: " + a.situation);
-                textToWrite.Add("Central/Olt: " + a.olt);
-                textToWrite.Add("Célula: " + a.cell);
-                textToWrite.Add("TechSee: " + a.techSee.ToString());
-                textToWrite.Add("App SmartRouter: " + a.appSmartrouter.ToString());
-                textToWrite.Add("Inquerito ICR: " + a.icr.ToString());
+
+                File.WriteAllLines(File.ReadAllText(d.saveDir) + @"/" + currentDate.Day.ToString() + ".txt", textToWrite);
+
             }
-            File.WriteAllLines(@"C:\Users\Iuri Dias\Desktop\test.txt", textToWrite);
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //The settings button opens the directory dialog since this is the onl setting that the user will access.
@@ -113,8 +128,8 @@ namespace CallReg_WPF
     {
         public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
         public string saveDir = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
-       public void saveDirCheck()
-       {
+        public void saveDirCheck()
+        {
             try
             {
                 if (File.Exists(saveDir))
@@ -127,10 +142,10 @@ namespace CallReg_WPF
                     directoryWindow.Show();
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }
-       }
+        }
     }
 }

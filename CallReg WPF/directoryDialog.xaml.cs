@@ -63,14 +63,30 @@ namespace CallReg_WPF
         //When you commit the app gets the location you entered and changes the data, or not.
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            
-            if(File.ReadAllText(defaultLocation) == dirTextbox.Text)
+            try
             {
-                //nothing
+                if (File.Exists(defaultLocation))
+                {
+                    if (File.ReadAllText(defaultLocation) == dirTextbox.Text)
+                    {
+                        //nothing
+                    }
+
+
+                    else
+                    {
+                        File.WriteAllText(defaultLocation, dirTextbox.Text);
+                    }
+                }
+                else
+                {
+                    File.WriteAllText(defaultLocation, dirTextbox.Text);
+                }
+                    
             }
-            else
+            catch(Exception exc)
             {
-                File.WriteAllText(defaultLocation, dirTextbox.Text);
+                System.Windows.MessageBox.Show(exc.Message);
             }
             this.Close();
         }

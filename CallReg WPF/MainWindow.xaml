@@ -6,6 +6,67 @@
         xmlns:local="clr-namespace:CallReg_WPF"
         mc:Ignorable="d"
         Title="CallReg" Height="542.895" Width="825.335" Background="Black" FontFamily="Source Sans Pro Light" FontSize="18" WindowStartupLocation="CenterScreen" Icon="vdf logo.png" RenderOptions.BitmapScalingMode="HighQuality">
+    <Window.Resources>
+        <ControlTemplate x:Key="ButtonStyle" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFC30000"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FF7A0000"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                    <Setter Property="Foreground" Value="#FF838383"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="SettingsButton" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" TargetName="border" Value="0.5"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border">
+                        <Setter.Value>
+                            <SolidColorBrush Color="#FF3E3D3D" Opacity="1"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="{x:Null}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                    
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="border" Value="{x:Null}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                    <Setter Property="Foreground" Value="#FF838383"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
@@ -24,15 +85,19 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Label x:Name="idLabel" Content="AID/CONTA/NIF: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,43,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="idLabel" Foreground="White"/>
-        <TextBox x:Name="idTextbox" Grid.Column="1" Height="23" Margin="137,47,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="idTextbox" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="idTextbox" Grid.Column="1" Height="23" Margin="137,47,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="idTextbox" BorderBrush="{x:Null}" Style="{DynamicResource tbStyle}">
+            <TextBox.SelectionBrush>
+                <SolidColorBrush Color="#FFD70000"/>
+            </TextBox.SelectionBrush>
+        </TextBox>
         <Label x:Name="nrLabel" Content="Nº de onde liga: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,71,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="nrLabel" Foreground="White"/>
-        <TextBox x:Name="nrTextbox" Grid.Column="1" Height="23" Margin="137,75,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="nrTextbox" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="nrTextbox" Grid.Column="1" Height="23" Margin="137,75,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="nrTextbox" BorderBrush="{x:Null}" SelectionBrush="#FFD70000" Style="{DynamicResource tbStyle}"/>
         <Label x:Name="nameLabel" Content="Nome: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,99,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="nameLabel" Foreground="White"/>
-        <TextBox x:Name="nameTextbox" Grid.Column="1" Height="23" Margin="137,103,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="nameTextbox" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="nameTextbox" Grid.Column="1" Height="23" Margin="137,103,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="nameTextbox" BorderBrush="{x:Null}" SelectionBrush="#FFD70000" Style="{DynamicResource tbStyle}"/>
         <Label x:Name="oltLabel" Content="Central/OLT: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,127,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="oltLabel" Foreground="White"/>
-        <TextBox x:Name="oltTextbox" Grid.Column="1" Height="23" Margin="137,131,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="oltTextbox" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="oltTextbox" Grid.Column="1" Height="23" Margin="137,131,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="oltTextbox" BorderBrush="{x:Null}" SelectionBrush="#FFD70000" Style="{DynamicResource tbStyle}"/>
         <Label x:Name="cellLabel" Content="Celula: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,155,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="cellLabel" Foreground="White"/>
-        <TextBox x:Name="cellTextbox" Grid.Column="1" Height="23" Margin="137,159,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="cellTextbox" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="cellTextbox" Grid.Column="1" Height="23" Margin="137,159,15,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Opacity="0.995" Background="#FF555555" AutomationProperties.Name="cellTextbox" BorderBrush="{x:Null}" SelectionBrush="#FFD70000" Style="{DynamicResource tbStyle}"/>
         <Label x:Name="addressLabel" Content="Validação morada: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,192,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="145" AutomationProperties.Name="addressLabel" Foreground="White"/>
         <Label x:Name="techseeLabel" Content="TechSee: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,224,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="124" AutomationProperties.Name="techseeLabel" Foreground="White"/>
         <Label x:Name="smartrouterLabel" Content="App SmartRouter: " Grid.Column="1" HorizontalAlignment="Left" Margin="8,256,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="145" AutomationProperties.Name="smartrouterLabel" Foreground="White"/>
@@ -50,11 +115,21 @@
         </RichTextBox>
         <Label x:Name="situationLabel" Content="Situação: " Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="32" Width="83" AutomationProperties.Name="situationLabel" Foreground="White"/>
         <Image x:Name="vdfLogo" HorizontalAlignment="Left" Height="143" Margin="-21,-14,0,0" VerticalAlignment="Top" Width="143" Grid.RowSpan="2" Source="vodafone-png-logo-8417.png" Grid.ColumnSpan="2" RenderOptions.BitmapScalingMode="HighQuality"/>
-        <Button x:Name="bCommit" Content="Confirmar" Grid.Column="2" Margin="0,0,10,10" Grid.Row="2" AutomationProperties.Name="bCommit" Click="bCommit_Click" Background="#FF555555" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="138" Height="47" VerticalAlignment="Bottom"/>
-        <Button x:Name="settingsButton" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="{x:Null}" Grid.Row="2" Click="settingsButton_Click">
+        <Button x:Name="bCommit" Content="Confirmar" Grid.Column="2" Margin="0,0,10,10" Grid.Row="2" AutomationProperties.Name="bCommit" Click="bCommit_Click" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="138" Height="47" VerticalAlignment="Bottom" Background="#FF555555" Template="{DynamicResource ButtonTemplate}">
+        </Button>
+        <Button x:Name="settingsButton" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Top" Width="50" Height="50" BorderBrush="{x:Null}" Grid.Row="2" Click="settingsButton_Click" Template="{DynamicResource SettingsButton}">
             <Button.Background>
                 <ImageBrush ImageSource="settingsa.png" Stretch="Uniform"/>
             </Button.Background>
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="True">
+                            <Setter Property="Button.Background" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
 
     </Grid>
