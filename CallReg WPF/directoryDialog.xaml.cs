@@ -78,6 +78,7 @@ namespace CallReg_WPF
                 }
                 else
                 {
+                    //After creating the file it calls the function in Data class to correctly populate the variables.
                     File.WriteAllText(defaultLocation, dirTextbox.Text);
                     Data mw = new Data();
                     mw.dataInit();
