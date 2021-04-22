@@ -52,6 +52,7 @@ namespace CallReg_WPF
         {
             
             Data d = new Data();
+            d.dataInit();
             try
             {
                 //This gets the user inputed data and makes it into a List.
@@ -98,7 +99,14 @@ namespace CallReg_WPF
                     Directory.CreateDirectory(d.saveDirMonth);
 
                 }
-                File.WriteAllLines(d.saveDirFile + ".txt", textToWrite);
+                List<string> tmpFile = new List<string>();
+                if(File.Exists(d.saveDirFile + ".txt"))
+                {
+                    tmpFile.AddRange(File.ReadAllLines(d.saveDirFile + ".txt"));
+                    tmpFile.Add("----------------------------------------------------------------------- \n");
+                    tmpFile.AddRange(textToWrite);
+                }
+                File.WriteAllLines(d.saveDirFile + ".txt", tmpFile);
 
             }
 
@@ -137,14 +145,21 @@ namespace CallReg_WPF
     {
         private static DateTime currentDateLocal = DateTime.Now;
         private static string saveDirLocal = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
-        private static string saveDirMonthLocal = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
+        private static string saveDirMonthLocal;
         //Temp fix. ^
 
         public DateTime currentDate = DateTime.Now;
         public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
         public string saveDir = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
-        public string saveDirMonth = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
+        public string saveDirMonth;
         public string saveDirFile = saveDirMonthLocal + @"/" + currentDateLocal.Day.ToString();
+        
+        public void dataInit()
+        {
+            saveDirCheck();
+            saveDirMonthLocal = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
+            saveDirMonth = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
+        }
         public void saveDirCheck()
         {
             try
