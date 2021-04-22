@@ -61,8 +61,8 @@ namespace CallReg_WPF
                 {
                     new DataCollection()
                     {
-                        id=int.Parse(idTextbox.Text),
-                        callId=int.Parse(nrTextbox.Text),
+                        id=idTextbox.Text,
+                        callId=nrTextbox.Text,
                         name=nameTextbox.Text,
                         addressVer=(bool)addressCheckbox.IsChecked,
                         situation=new TextRange(situationTextBox.Document.ContentStart,
@@ -113,6 +113,11 @@ namespace CallReg_WPF
                     tmpFile.Add("------------------------------------------------------------------------------------- \n");
                     tmpFile.AddRange(textToWrite);
                 }
+                else
+                {
+                    tmpFile.AddRange(textToWrite);
+                    File.WriteAllLines(d.saveDirFile + ".txt", tmpFile);
+                }
                 //...if there isn't one, or after it has got the info from the old file, it writes the new file with all the new info. 
                 MessageBox.Show(d.saveDirFile);
                 File.WriteAllLines(d.saveDirFile + ".txt", tmpFile);
@@ -136,8 +141,8 @@ namespace CallReg_WPF
     //DataCollection is a collection with all the info inputed by the user. 
     public class DataCollection
     {
-        public int id { get; set; }
-        public int callId { get; set; }
+        public string id { get; set; }
+        public string callId { get; set; }
         public string name { get; set; }
         public bool addressVer { get; set; }
         public string situation { get; set; }
