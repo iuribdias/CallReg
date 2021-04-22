@@ -24,6 +24,9 @@ namespace CallReg_WPF
         public MainWindow()
         {
             InitializeComponent();
+            //At application start it checks if there is the config with the desired user location.
+            Data d = new Data();
+            d.saveDirCheck();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -103,6 +106,25 @@ namespace CallReg_WPF
     public class Data
     {
         public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
-       // public string saveDir = File.ReadAllText(mainDir);
+        public string saveDir = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
+       public void saveDirCheck()
+       {
+            try
+            {
+                if (File.Exists(saveDir))
+                {
+
+                }
+                else
+                {
+                    directoryDialog directoryWindow = new directoryDialog();
+                    directoryWindow.Show();
+                }
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+       }
     }
 }

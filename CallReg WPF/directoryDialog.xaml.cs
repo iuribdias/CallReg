@@ -35,6 +35,7 @@ namespace CallReg_WPF
                 }
                 else
                 {
+                    //If the file was never created it asks for the user to make one. 
                     System.Windows.MessageBox.Show("Ainda nunca foi definida a pasta base, por favor selecione.");
                 }
             }
@@ -58,6 +59,7 @@ namespace CallReg_WPF
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg", dirTextbox.Text);
+            this.Close();
         }
     }
 }
