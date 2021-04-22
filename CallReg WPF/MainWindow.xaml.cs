@@ -89,16 +89,16 @@ namespace CallReg_WPF
                     textToWrite.Add("Inquerito ICR: " + a.icr.ToString());
                 }
 
-                if (Directory.Exists(File.ReadAllText(d.saveDir) + @"\" + d.currentDate.Month.ToString()))
+                if (Directory.Exists(d.saveDirMonth))
                 {
 
                 }
                 else
                 {
-                    Directory.CreateDirectory(d.saveDir + @"\" + d.currentDate.Month.ToString());
+                    Directory.CreateDirectory(d.saveDirMonth);
 
                 }
-                File.WriteAllLines(File.ReadAllText(d.saveDir) + @"/" + d.currentDate.Day.ToString() + ".txt", textToWrite);
+                File.WriteAllLines(d.saveDirFile + ".txt", textToWrite);
 
             }
 
@@ -137,13 +137,13 @@ namespace CallReg_WPF
     {
         private static DateTime currentDateLocal = DateTime.Now;
         private static string saveDirLocal = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
-        private static string saveDirMonthLocal = saveDirLocal + @"/" + currentDateLocal.Month.ToString();
+        private static string saveDirMonthLocal = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
         //Temp fix. ^
 
         public DateTime currentDate = DateTime.Now;
         public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
         public string saveDir = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
-        public string saveDirMonth = saveDirLocal + @"/" + currentDateLocal.Month.ToString();
+        public string saveDirMonth = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
         public string saveDirFile = saveDirMonthLocal + @"/" + currentDateLocal.Day.ToString();
         public void saveDirCheck()
         {
