@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CallReg_WPF"
         mc:Ignorable="d"
-        Title="Diretório" Height="119.437" Width="660.054" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Diretório" Height="119.437" Width="660.054" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="vdf logo.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace CallReg_WPF
@@ -21,9 +22,26 @@ namespace CallReg_WPF
     /// </summary>
     public partial class directoryDialog : Window
     {
+        public string resultDir;
         public directoryDialog()
         {
             InitializeComponent();
+            try
+            {
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg"))
+                {
+                    resultDir = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg");
+                    dirTextbox.Text = resultDir;
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Ainda nunca foi definida a pasta base, por favor selecione.");
+                }
+            }
+            catch (Exception exc)
+            {
+                System.Windows.MessageBox.Show(exc.Message);
+            }
         }
 
         private void bOpen_Click(object sender, RoutedEventArgs e)
@@ -39,7 +57,7 @@ namespace CallReg_WPF
 
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg", dirTextbox.Text);
         }
     }
 }
