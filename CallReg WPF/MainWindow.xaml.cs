@@ -173,31 +173,32 @@ namespace CallReg_WPF
         //This function gets called to verify if there is a file with the default save location and sets some local variables
         public void dataInit()
         {
-            saveDirCheck();
-            if(File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg"))
+            if(saveDirCheck() == true)
             {
                 saveDirMonthLocal = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
                 saveDirMonth = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM"); 
             }
         }
         //This function checks if there is 
-        public void saveDirCheck()
+        public bool saveDirCheck()
         {
             try
             {
                 if (File.Exists(saveDir))
                 {
-
+                    return true;
                 }
                 else
                 {
                     directoryDialog directoryWindow = new directoryDialog();
                     directoryWindow.Show();
+                    return false;
                 }
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
+                return false;
             }
         }
     }
