@@ -27,6 +27,7 @@ namespace CallReg_WPF
             InitializeComponent();
             //At application start it checks if there is the config with the desired user location.
             Data d = new Data();
+            d.saveDirCheck();
         }
         //deprecated
         private void Button_Click(object sender, RoutedEventArgs e)

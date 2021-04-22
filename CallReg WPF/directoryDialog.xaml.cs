@@ -79,6 +79,9 @@ namespace CallReg_WPF
                 else
                 {
                     File.WriteAllText(defaultLocation, dirTextbox.Text);
+                    Data mw = new Data();
+                    mw.dataInit();
+                    
                 }
                     
             }
