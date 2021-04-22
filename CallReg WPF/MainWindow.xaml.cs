@@ -73,7 +73,7 @@ namespace CallReg_WPF
                     }
                 };
 
-                //This takes the data and formats it to go into de file.
+                //This takes the data and formats it to go into the file.
                 List<string> textToWrite = new List<string>();
                 foreach (DataCollection a in currentData)
                 {
