@@ -50,7 +50,7 @@ namespace CallReg_WPF
         //b_Commit is where most action goes on. Its the function that checks what has been done and saves the info to the files.
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            DateTime currentDate = DateTime.Now;
+            
             Data d = new Data();
             try
             {
@@ -89,7 +89,16 @@ namespace CallReg_WPF
                     textToWrite.Add("Inquerito ICR: " + a.icr.ToString());
                 }
 
-                File.WriteAllLines(File.ReadAllText(d.saveDir) + @"/" + currentDate.Day.ToString() + ".txt", textToWrite);
+                if (Directory.Exists(File.ReadAllText(d.saveDir) + @"\" + d.currentDate.Month.ToString()))
+                {
+
+                }
+                else
+                {
+                    Directory.CreateDirectory(d.saveDir + @"\" + d.currentDate.Month.ToString());
+
+                }
+                File.WriteAllLines(File.ReadAllText(d.saveDir) + @"/" + d.currentDate.Day.ToString() + ".txt", textToWrite);
 
             }
 
@@ -126,8 +135,16 @@ namespace CallReg_WPF
     //The Data class is where backend data get manipulated and stored.
     public class Data
     {
+        private static DateTime currentDateLocal = DateTime.Now;
+        private static string saveDirLocal = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
+        private static string saveDirMonthLocal = saveDirLocal + @"/" + currentDateLocal.Month.ToString();
+        //Temp fix. ^
+
+        public DateTime currentDate = DateTime.Now;
         public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
         public string saveDir = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
+        public string saveDirMonth = saveDirLocal + @"/" + currentDateLocal.Month.ToString();
+        public string saveDirFile = saveDirMonthLocal + @"/" + currentDateLocal.Day.ToString();
         public void saveDirCheck()
         {
             try
