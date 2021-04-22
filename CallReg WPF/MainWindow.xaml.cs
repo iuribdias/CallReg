@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Threading;
 
 namespace CallReg_WPF
 {
@@ -26,14 +27,14 @@ namespace CallReg_WPF
             InitializeComponent();
             //At application start it checks if there is the config with the desired user location.
             Data d = new Data();
-            d.saveDirCheck();
         }
-
+        //deprecated
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
 
+        //deprecated
         private void Maximize_Click(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow.WindowState == WindowState.Normal)
@@ -50,7 +51,6 @@ namespace CallReg_WPF
         //b_Commit is where most action goes on. Its the function that checks what has been done and saves the info to the files.
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            
             Data d = new Data();
             d.dataInit();
             try
@@ -87,25 +87,33 @@ namespace CallReg_WPF
                     textToWrite.Add("Célula: " + a.cell);
                     textToWrite.Add("TechSee: " + a.techSee.ToString());
                     textToWrite.Add("App SmartRouter: " + a.appSmartrouter.ToString());
-                    textToWrite.Add("Inquerito ICR: " + a.icr.ToString());
+                    textToWrite.Add("Inquerito ICR: " + a.icr.ToString() + "\n");
                 }
 
+                //Check if there is a folder for the month in question
                 if (Directory.Exists(d.saveDirMonth))
                 {
 
                 }
+                //Create that folder if there isn't.
                 else
                 {
                     Directory.CreateDirectory(d.saveDirMonth);
 
                 }
+
+                //Temporary list that will contain everything that will go into the file.
                 List<string> tmpFile = new List<string>();
+
+                //Checks if the file exists, if it does, it'll read it and then concat the new info before writing it...
                 if(File.Exists(d.saveDirFile + ".txt"))
                 {
                     tmpFile.AddRange(File.ReadAllLines(d.saveDirFile + ".txt"));
-                    tmpFile.Add("----------------------------------------------------------------------- \n");
+                    tmpFile.Add("------------------------------------------------------------------------------------- \n");
                     tmpFile.AddRange(textToWrite);
                 }
+                //...if there isn't one, or after it has got the info from the old file, it writes the new file with all the new info. 
+                MessageBox.Show(d.saveDirFile);
                 File.WriteAllLines(d.saveDirFile + ".txt", tmpFile);
 
             }
@@ -116,7 +124,7 @@ namespace CallReg_WPF
             }
         }
 
-        //The settings button opens the directory dialog since this is the onl setting that the user will access.
+        //The settings button opens the directory dialog since this is the only setting that the user will access.
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
             directoryDialog directoryWindow = new directoryDialog();
@@ -143,23 +151,30 @@ namespace CallReg_WPF
     //The Data class is where backend data get manipulated and stored.
     public class Data
     {
+        //these are locally used variables.
         private static DateTime currentDateLocal = DateTime.Now;
         private static string saveDirLocal = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
         private static string saveDirMonthLocal;
         //Temp fix. ^
 
+        //These are variables accessible wherever in the mainWindow workspace
         public DateTime currentDate = DateTime.Now;
         public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
         public string saveDir = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
         public string saveDirMonth;
         public string saveDirFile = saveDirMonthLocal + @"/" + currentDateLocal.Day.ToString();
         
+        //This function gets called to verify if there is a file with the default save location and sets some local variables
         public void dataInit()
         {
             saveDirCheck();
-            saveDirMonthLocal = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
-            saveDirMonth = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
+            if(File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg"))
+            {
+                saveDirMonthLocal = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM");
+                saveDirMonth = File.ReadAllText(saveDirLocal) + @"/" + currentDateLocal.ToString("MMMM"); 
+            }
         }
+        //This function checks if there is 
         public void saveDirCheck()
         {
             try

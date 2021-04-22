@@ -71,8 +71,6 @@ namespace CallReg_WPF
                     {
                         //nothing
                     }
-
-
                     else
                     {
                         File.WriteAllText(defaultLocation, dirTextbox.Text);
