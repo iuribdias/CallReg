@@ -23,14 +23,16 @@ namespace CallReg_WPF
     public partial class directoryDialog : Window
     {
         public string resultDir;
+        public string defaultLocation = AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg";
         public directoryDialog()
         {
             InitializeComponent();
+            //At the start of the dialog it looks up the cfg file. 
             try
             {
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg"))
+                if (File.Exists(defaultLocation))
                 {
-                    resultDir = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg");
+                    resultDir = File.ReadAllText(defaultLocation);
                     dirTextbox.Text = resultDir;
                 }
                 else
@@ -45,8 +47,10 @@ namespace CallReg_WPF
             }
         }
 
+        //The open button opens a folder selection dialog.
         private void bOpen_Click(object sender, RoutedEventArgs e)
         {
+
             string resultDir;
             using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
@@ -56,9 +60,18 @@ namespace CallReg_WPF
             dirTextbox.Text = resultDir;
         }
 
+        //When you commit the app gets the location you entered and changes the data, or not.
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\location.cfg", dirTextbox.Text);
+            
+            if(File.ReadAllText(defaultLocation) == dirTextbox.Text)
+            {
+                //nothing
+            }
+            else
+            {
+                File.WriteAllText(defaultLocation, dirTextbox.Text);
+            }
             this.Close();
         }
     }

@@ -47,11 +47,13 @@ namespace CallReg_WPF
 
         }
 
+        //b_Commit is where most action goes on. Its the function that checks what has been done and saves the info to the files.
         private void bCommit_Click(object sender, RoutedEventArgs e)
         {
-            var currentData = new List<DataClass>
+            
+            var currentData = new List<DataCollection>
             {
-                new DataClass(){
+                new DataCollection(){
                     id=int.Parse(idTextbox.Text),
                     callId=int.Parse(nrTextbox.Text),
                     name=nameTextbox.Text,
@@ -66,7 +68,7 @@ namespace CallReg_WPF
                 }
             };
             List<string> textToWrite = new List<string>();
-            foreach(DataClass a in currentData)
+            foreach(DataCollection a in currentData)
             {
                 textToWrite.Add("ID: " + a.id.ToString());
                 textToWrite.Add("Nº de od liga: " + a.callId.ToString());
@@ -82,13 +84,16 @@ namespace CallReg_WPF
             File.WriteAllLines(@"C:\Users\Iuri Dias\Desktop\test.txt", textToWrite);
         }
 
+        //The settings button opens the directory dialog since this is the onl setting that the user will access.
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
             directoryDialog directoryWindow = new directoryDialog();
             directoryWindow.Show();
         }
     }
-    public class DataClass
+
+    //DataCollection is a collection with all the info inputed by the user. 
+    public class DataCollection
     {
         public int id { get; set; }
         public int callId { get; set; }
@@ -103,6 +108,7 @@ namespace CallReg_WPF
 
     }
 
+    //The Data class is where backend data get manipulated and stored.
     public class Data
     {
         public string mainDir = AppDomain.CurrentDomain.BaseDirectory;
